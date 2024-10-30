@@ -1,0 +1,52 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD com.example.Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pag.mapper.MaxKbEmbeddingMapper">
+
+    <insert id="insert" parameterType="com.pag.pojo.MaxKbEmbedding">
+        insert into max_kb_embedding
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="sourceId != null">source_id,</if>
+            <if test="sourceType != null">source_type,</if>
+            <if test="isActive != null">is_active,</if>
+            <if test="embedding != null">embedding,</if>
+            <if test="meta != null">meta,</if>
+            <if test="datasetId != null">dataset_id,</if>
+            <if test="documentId != null">document_id,</if>
+            <if test="paragraphId != null">paragraph_id,</if>
+            <if test="searchVector != null">search_vector,</if>
+            <if test="creator != null">creator,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updater != null">updater,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="deleted != null">deleted,</if>
+            <if test="tenantId != null">tenant_id,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="sourceId != null">#{sourceId},</if>
+            <if test="sourceType != null">#{sourceType},</if>
+            <if test="isActive != null">#{isActive},</if>
+            <if test="embedding != null">#{embedding, typeHandler=com.pag.unit.VectorTypeHandler},</if>
+            <if test="meta != null">#{meta, typeHandler=com.pag.unit.JsonbTypeHandler},</if>
+            <if test="datasetId != null">#{datasetId},</if>
+            <if test="documentId != null">#{documentId},</if>
+            <if test="paragraphId != null">#{paragraphId},</if>
+            <if test="searchVector != null">#{searchVector,typeHandler=com.pag.unit.TsvectorTypeHandler},</if>
+            <if test="creator != null">#{creator},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updater != null">#{updater},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="deleted != null">#{deleted},</if>
+            <if test="tenantId != null">#{tenantId},</if>
+        </trim>
+    </insert>
+    
+    <select id="queryVectorSentence" parameterType="java.lang.String">
+        SELECT embedding &lt;= &gt; #{val} AS distance FROM max_kb_embedding
+    </select>
+
+
+</mapper>

@@ -1,0 +1,97 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD com.example.Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pag.mapper.MaxKbDatasetMapper">
+
+    <resultMap id="result" type="com.pag.pojo.MaxKbDataset">
+        <result property="id" column="id" />
+        <result property="name" column="name" />
+        <result property="description" column="description" />
+        <result property="type" column="type"/>
+        <result property="meta" column="meta"/>
+        <result property="userId" column="user_id"/>
+        <result property="remark" column="remark"/>
+        <result property="creator" column="creator"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updater" column="updater"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="deleted" column="deleted"/>
+        <result property="tenantId" column="tenant_id"/>
+
+    </resultMap>
+
+    <select id="List" resultMap="result">
+        SELECT id,name,type,description,meta,create_time FROM max_kb_dataset
+    </select>
+
+    <select id="queryPage" resultMap="result"  parameterType="Integer">
+        select id,name,type,description,meta,create_time
+        from max_kb_dataset
+        order by id desc
+        LIMIT 5 OFFSET #{startRows}
+    </select>
+
+    <select id="getRowCount" resultType="Integer">
+        select count(*) from max_kb_dataset
+    </select>
+
+    <select id="findByName" resultMap="result" parameterType="String">
+        SELECT * FROM max_kb_dataset
+        where name LIKE '%' || #{name} || '%'
+        order by id desc
+    </select>
+
+
+    <insert id="insert" parameterType="com.pag.pojo.MaxKbDataset">
+        insert into max_kb_dataset
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="name != null">name,</if>
+            <if test="description != null">description,</if>
+            <if test="type != null">type,</if>
+            <if test="meta != null">meta,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="remark != null">remark,</if>
+            <if test="creator != null">creator,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updater != null">updater,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="deleted != null">deleted,</if>
+            <if test="tenantId != null">tenant_id,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="name != null">#{name},</if>
+            <if test="description != null">#{description},</if>
+            <if test="type != null">#{type},</if>
+            <if test="meta != null">#{meta},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="creator != null">#{creator},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updater != null">#{updater},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="deleted != null">#{deleted},</if>
+            <if test="tenantId != null">#{tenantId},</if>
+        </trim>
+    </insert>
+
+    <update id="update" parameterType="com.pag.pojo.MaxKbDataset">
+        update max_kb_dataset
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null"> name = #{name},</if>
+            <if test="description != null">description = #{description},</if>
+            <if test="type != null"> type = #{type},</if>
+            <if test="meta != null"> meta = #{meta},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+
+    <delete id="delete" parameterType="java.lang.Long">
+        delete from max_kb_dataset where id=#{id}
+    </delete>
+
+
+</mapper>

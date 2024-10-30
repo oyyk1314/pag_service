@@ -1,0 +1,53 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD com.example.Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pag.mapper.MaxKbParagraphMapper">
+
+    <insert id="insert" parameterType="com.pag.pojo.MaxKbParagraph">
+        insert into max_kb_paragraph
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="content != null">content,</if>
+            <if test="title != null">title,</if>
+            <if test="status != null">status,</if>
+            <if test="isActive != null">is_active,</if>
+            <if test="hitNum != null">hit_num,</if>
+            <if test="datasetId != null">dataset_id,</if>
+            <if test="documentId != null">document_id,</if>
+            <if test="creator != null">creator,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updater != null">updater,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="deleted != null">deleted,</if>
+            <if test="tenantId != null">tenant_id,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="content != null">#{content},</if>
+            <if test="title != null">#{title},</if>
+            <if test="status != null">#{status},</if>
+            <if test="isActive != null">#{isActive},</if>
+            <if test="hitNum != null">#{hitNum},</if>
+            <if test="datasetId != null">#{datasetId},</if>
+            <if test="documentId != null">#{documentId},</if>
+            <if test="creator != null">#{creator},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updater != null">#{updater},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="deleted != null">#{deleted},</if>
+            <if test="tenantId != null">#{tenantId},</if>
+        </trim>
+    </insert>
+
+    <insert id="batchInsert">
+        INSERT INTO max_kb_paragraph (id, content,title,status,hit_num,
+        is_active,dataset_id,document_id,creator,create_time,updater,update_time,deleted,tenant_id)
+        VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.id}, #{item.content},#{item.title},#{item.status},#{item.hitNum},#{item.isActive},
+            #{item.hitNum},#{item.datasetId},#{item.documentId},#{item.creator},#{item.createTime},#{item.updater},
+            #{item.updateTime},#{item.deleted},#{item.tenantId})
+        </foreach>
+    </insert>
+</mapper>

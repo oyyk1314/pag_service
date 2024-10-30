@@ -1,0 +1,76 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD com.example.Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pag.mapper.MaxKbFileMapper">
+
+    <resultMap id="result" type="com.pag.pojo.MaxKbFile">
+        <result property="id" column="id" />
+        <result property="md5" column="md5" />
+        <result property="fileName" column="file_name" />
+        <result property="fileSize" column="file_size"/>
+        <result property="userId" column="user_id"/>
+        <result property="platform" column="platform"/>
+        <result property="regionName" column="regionName"/>
+        <result property="bucketName" column="bucketName"/>
+        <result property="fileId" column="file_id"/>
+        <result property="targetName" column="target_name"/>
+        <result property="targetName" column="target_name"/>
+        <result property="tags" column="tags"/>
+        <result property="creator" column="creator"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updater" column="updater"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="deleted" column="deleted"/>
+        <result property="tenantId" column="tenant_id"/>
+
+    </resultMap>
+
+
+    <insert id="insert" parameterType="com.pag.pojo.MaxKbFile">
+        insert into max_kb_file
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="md5 != null">md5,</if>
+            <if test="fileName != null">file_name,</if>
+            <if test="fileSize != null">file_size,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="platform != null">platform,</if>
+            <if test="regionName != null">region_name,</if>
+            <if test="bucketName != null">bucket_name,</if>
+            <if test="fileId != null">file_id,</if>
+            <if test="targetName != null">target_name,</if>
+            <if test="tags != null">tags,</if>
+            <if test="creator != null">creator,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updater != null">updater,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="deleted != null">deleted,</if>
+            <if test="tenantId != null">tenant_id,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="md5 != null">#{md5},</if>
+            <if test="fileName != null">#{fileName},</if>
+            <if test="fileSize != null">#{fileSize},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="platform != null">#{platform},</if>
+            <if test="regionName != null">#{regionName},</if>
+            <if test="bucketName != null">#{bucketName},</if>
+            <if test="fileId != null">#{fileId},</if>
+            <if test="targetName != null">#{targetName},</if>
+            <if test="tags != null">#{tags},</if>
+            <if test="creator != null">#{creator},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updater != null">#{updater},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="deleted != null">#{deleted},</if>
+            <if test="tenantId != null">#{tenantId},</if>
+        </trim>
+    </insert>
+
+    <select id="queryByFile" parameterType="java.lang.String"  resultType="Integer">
+        select count(1) from max_kb_file where md5 = #{md5}
+    </select>
+
+</mapper>
